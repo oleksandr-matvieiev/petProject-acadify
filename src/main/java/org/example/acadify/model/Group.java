@@ -1,4 +1,4 @@
-package org.example.skilltradehub.model;
+package org.example.acadify.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

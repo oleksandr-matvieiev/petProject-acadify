@@ -1,9 +1,7 @@
-package org.example.skilltradehub.model;
+package org.example.acadify.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.skilltradehub.model.Student;
-import org.example.skilltradehub.model.Task;
 
 import java.time.LocalDateTime;
 

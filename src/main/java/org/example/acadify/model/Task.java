@@ -1,10 +1,10 @@
-package org.example.skilltradehub.model;
+package org.example.acadify.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.skilltradehub.Enums.TaskType;
+import org.example.acadify.Enums.TaskType;
 
 import java.time.LocalDateTime;
 import java.util.List;

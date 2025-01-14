@@ -1,4 +1,4 @@
-package org.example.skilltradehub.Enums;
+package org.example.acadify.Enums;
 
 public enum RoleName {
     STUDENT,

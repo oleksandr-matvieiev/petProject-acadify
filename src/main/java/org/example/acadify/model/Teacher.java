@@ -11,7 +11,6 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-@Table(name = "teachers")
 public class Teacher extends User{
 
     @OneToMany(mappedBy = "teacher")

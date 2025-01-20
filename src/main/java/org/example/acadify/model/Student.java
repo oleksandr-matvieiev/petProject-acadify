@@ -11,11 +11,10 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-@Table(name = "students")
 public class Student extends User {
 
     @ManyToOne
-    @JoinColumn(name = "group_id", nullable = false)
+    @JoinColumn(name = "group_id")
     private Group group;
 
     @OneToMany(mappedBy = "student")

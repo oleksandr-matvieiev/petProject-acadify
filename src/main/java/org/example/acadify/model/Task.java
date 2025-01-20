@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.acadify.Enums.TaskType;
+import org.example.acadify.model.Group;
+import org.example.acadify.model.TaskSubmission;
+import org.example.acadify.model.Teacher;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,13 +38,19 @@ public class Task {
     @Column(nullable = false)
     private Boolean checked = false;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "teacher_id", nullable = false)
     private Teacher teacher;
 
-    @ManyToMany(mappedBy = "tasks")
+    @ManyToMany
+    @JoinTable(
+            name = "group_tasks",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id")
+    )
     private List<Group> groups;
 
-    @OneToMany(mappedBy = "task")
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TaskSubmission> submissions;
 }

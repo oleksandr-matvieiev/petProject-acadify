@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-@Table(name = "groups")
+@Table(name = "student_groups")
 public class Group {
 
     @Id
@@ -21,6 +21,14 @@ public class Group {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Student> students;
+
+    @ManyToMany
+    @JoinTable(
+            name = "group_tasks",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id")
+    )
+    private List<Task> tasks;
 }

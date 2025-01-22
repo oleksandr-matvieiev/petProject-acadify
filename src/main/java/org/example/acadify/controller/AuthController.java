@@ -1,7 +1,7 @@
 package org.example.acadify.controller;
 
 import org.example.acadify.DTOs.TeacherDTO;
-import org.example.acadify.DTOs.TeacherLoginDTO;
+import org.example.acadify.DTOs.UserLoginRequestDTO;
 import org.example.acadify.DTOs.TeacherRegistrationDTO;
 import org.example.acadify.service.AuthService;
 import org.springframework.http.HttpStatus;
@@ -27,8 +27,8 @@ public class AuthController {
     }
 
     @PostMapping("/login/teacher")
-    public ResponseEntity<?> loginTeacher(@RequestBody TeacherLoginDTO teacherLoginDTO) {
-        String token = authService.login(teacherLoginDTO);
+    public ResponseEntity<?> loginTeacher(@RequestBody UserLoginRequestDTO userLoginRequestDTO) {
+        String token = authService.login(userLoginRequestDTO);
         return ResponseEntity.ok(token);
     }
 }

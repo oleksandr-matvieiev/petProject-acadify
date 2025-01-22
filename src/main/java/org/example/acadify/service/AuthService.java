@@ -1,7 +1,7 @@
 package org.example.acadify.service;
 
 import org.example.acadify.DTOs.TeacherDTO;
-import org.example.acadify.DTOs.TeacherLoginDTO;
+import org.example.acadify.DTOs.UserLoginRequestDTO;
 import org.example.acadify.DTOs.TeacherRegistrationDTO;
 import org.example.acadify.Enums.RoleName;
 import org.example.acadify.Security.JwtTokenProvider;
@@ -67,15 +67,15 @@ public class AuthService {
 
         return teacherMapper.toDTO(userRepository.save(teacher));
     }
-    public String login(TeacherLoginDTO teacherLoginDTO) {
+    public String login(UserLoginRequestDTO userLoginRequestDTO) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        teacherLoginDTO.getEmail(),
-                        teacherLoginDTO.getPassword()
+                        userLoginRequestDTO.getEmail(),
+                        userLoginRequestDTO.getPassword()
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        User user = userRepository.findByEmail(teacherLoginDTO.getEmail())
+        User user = userRepository.findByEmail(userLoginRequestDTO.getEmail())
                 .orElseThrow(UserNotFoundExc::new);
 
         List<String> roles = user.getRoles().stream()

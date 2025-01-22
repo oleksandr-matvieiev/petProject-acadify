@@ -3,7 +3,7 @@ package org.example.acadify.DTOs;
 import lombok.Data;
 
 @Data
-public class TeacherLoginDTO {
+public class UserLoginRequestDTO {
     private String email;
     private String password;
 }

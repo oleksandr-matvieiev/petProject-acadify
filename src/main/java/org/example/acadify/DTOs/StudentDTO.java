@@ -1,11 +1,13 @@
 package org.example.acadify.DTOs;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class StudentDTO {
+public class StudentDTO extends UserDTO {
     private Long id;
 
     private Long groupId;

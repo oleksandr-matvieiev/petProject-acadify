@@ -1,4 +1,4 @@
-package org.example.skilltradehub;
+package org.example.acadify;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

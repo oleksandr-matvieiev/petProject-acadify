@@ -7,10 +7,12 @@ import org.example.acadify.repository.GradeRepository;
 import org.example.acadify.repository.GroupRepository;
 import org.example.acadify.repository.RoleRepository;
 import org.example.acadify.repository.TaskSubmissionRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class StudentMapper {
     private final RoleRepository roleRepository;
     private final GroupRepository groupRepository;

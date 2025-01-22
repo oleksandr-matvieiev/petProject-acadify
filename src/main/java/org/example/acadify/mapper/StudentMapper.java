@@ -2,23 +2,23 @@ package org.example.acadify.mapper;
 
 import org.example.acadify.DTOs.StudentDTO;
 import org.example.acadify.exceptions.GroupNotFoundExc;
-import org.example.acadify.model.Grade;
-import org.example.acadify.model.Group;
-import org.example.acadify.model.Student;
-import org.example.acadify.model.TaskSubmission;
+import org.example.acadify.model.*;
 import org.example.acadify.repository.GradeRepository;
 import org.example.acadify.repository.GroupRepository;
+import org.example.acadify.repository.RoleRepository;
 import org.example.acadify.repository.TaskSubmissionRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class StudentMapper {
+    private final RoleRepository roleRepository;
     private final GroupRepository groupRepository;
     private final GradeRepository gradeRepository;
     private final TaskSubmissionRepository taskSubmissionRepository;
 
-    public StudentMapper(GroupRepository groupRepository, GradeRepository gradeRepository, TaskSubmissionRepository taskSubmissionRepository) {
+    public StudentMapper(RoleRepository roleRepository, GroupRepository groupRepository, GradeRepository gradeRepository, TaskSubmissionRepository taskSubmissionRepository) {
+        this.roleRepository = roleRepository;
         this.groupRepository = groupRepository;
         this.gradeRepository = gradeRepository;
         this.taskSubmissionRepository = taskSubmissionRepository;
@@ -28,6 +28,10 @@ public class StudentMapper {
         StudentDTO studentDTO = new StudentDTO();
 
         studentDTO.setId(student.getId());
+        studentDTO.setFirstName(student.getFirstName());
+        studentDTO.setLastName(student.getLastName());
+        studentDTO.setEmail(student.getEmail());
+        studentDTO.setRoleIds(mapRolesToIds(student.getRoles()));
         studentDTO.setGroupId(student.getGroup().getId());
         studentDTO.setGradeIds(mapGradesToIds(student.getGrades()));
         studentDTO.setSubmissionIds(mapTaskSubmissionsToIds(student.getSubmissions()));
@@ -41,11 +45,27 @@ public class StudentMapper {
                 .orElseThrow(GroupNotFoundExc::new);
 
         student.setId(studentDTO.getId());
+        student.setFirstName(studentDTO.getFirstName());
+        student.setLastName(studentDTO.getLastName());
+        student.setEmail(studentDTO.getEmail());
+        student.setRoles(mapIdsToRoles(studentDTO.getRoleIds()));
         student.setGroup(group);
         student.setGrades(mapIdsToGrades(studentDTO.getGradeIds()));
         student.setSubmissions(mapIdsToTaskSubmissions(studentDTO.getSubmissionIds()));
 
         return student;
+    }
+
+    private List<Long> mapRolesToIds(List<Role> roles) {
+        if (roles == null || roles.isEmpty()) return List.of();
+
+        return roles.stream().map(Role::getId).collect(Collectors.toList());
+    }
+
+    private List<Role> mapIdsToRoles(List<Long> ids) {
+        if (ids == null || ids.isEmpty()) return List.of();
+
+        return roleRepository.findAllById(ids);
     }
 
     private List<Long> mapGradesToIds(List<Grade> grades) {

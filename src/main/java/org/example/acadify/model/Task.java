@@ -5,11 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.acadify.Enums.TaskType;
-import org.example.acadify.model.Group;
-import org.example.acadify.model.TaskSubmission;
-import org.example.acadify.model.Teacher;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -48,7 +46,7 @@ public class Task {
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
-    private List<Group> groups;
+    private List<Group> groups = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "subject_id")
@@ -56,5 +54,5 @@ public class Task {
 
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TaskSubmission> submissions;
+    private List<TaskSubmission> submissions = new ArrayList<>();
 }

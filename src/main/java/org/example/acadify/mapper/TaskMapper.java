@@ -1,5 +1,6 @@
 package org.example.acadify.mapper;
 
+import jakarta.persistence.Column;
 import org.example.acadify.DTOs.TaskDTO;
 import org.example.acadify.exceptions.UserNotFoundExc;
 import org.example.acadify.model.Group;
@@ -8,7 +9,9 @@ import org.example.acadify.model.Teacher;
 import org.example.acadify.repository.GroupRepository;
 import org.example.acadify.repository.TeacherRepository;
 import org.example.acadify.util.MappingUtils;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TaskMapper {
     private final TeacherRepository teacherRepository;
     private final GroupRepository groupRepository;

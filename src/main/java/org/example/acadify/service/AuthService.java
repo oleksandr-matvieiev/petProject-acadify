@@ -2,8 +2,8 @@ package org.example.acadify.service;
 
 import org.example.acadify.DTOs.StudentDTO;
 import org.example.acadify.DTOs.TeacherDTO;
-import org.example.acadify.DTOs.UserRegistrationDTO;
 import org.example.acadify.DTOs.UserLoginRequestDTO;
+import org.example.acadify.DTOs.UserRegistrationDTO;
 import org.example.acadify.Enums.RoleName;
 import org.example.acadify.Security.JwtTokenProvider;
 import org.example.acadify.exceptions.GroupNotFoundExc;

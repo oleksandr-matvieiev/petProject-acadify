@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("api/auth/register/student").hasRole("ADMIN")
                         .requestMatchers("api/group/student/add-to-group").hasRole("ADMIN")
                         .requestMatchers("api/subject/**").hasRole("ADMIN")
+                        .requestMatchers("api/task/create").hasRole("TEACHER")
                         .anyRequest().permitAll()
 
                 )

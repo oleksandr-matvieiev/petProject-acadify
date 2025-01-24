@@ -11,6 +11,7 @@ public class StudentDTO extends UserDTO {
     private Long id;
 
     private Long groupId;
+    private List<Long> subjectIds;
 
     private List<Long> gradeIds;
 

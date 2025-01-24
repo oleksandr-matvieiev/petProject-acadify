@@ -24,5 +24,6 @@ public class TaskDTO {
     private Long teacherId;
 
     private List<Long> groupIds;
+    private Long subjectId;
 
 }

@@ -50,6 +50,10 @@ public class Task {
     )
     private List<Group> groups;
 
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
+
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TaskSubmission> submissions;

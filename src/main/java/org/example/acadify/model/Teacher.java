@@ -11,8 +11,15 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-public class Teacher extends User{
+public class Teacher extends User {
 
+    @ManyToMany
+    @JoinTable(
+            name = "teacher_subjects",
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id")
+    )
+    private List<Subject> subjects;
     @OneToMany(mappedBy = "teacher")
     private List<Task> tasks;
 

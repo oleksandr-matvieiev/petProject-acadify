@@ -10,5 +10,6 @@ import java.util.List;
 @Data
 public class TeacherDTO extends UserDTO {
     private Long id;
+    private List<Long> subjectIds;
     private List<Long> taskIds;
 }

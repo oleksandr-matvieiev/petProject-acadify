@@ -1,6 +1,5 @@
 package org.example.acadify.mapper;
 
-import jakarta.persistence.Column;
 import org.example.acadify.DTOs.TaskDTO;
 import org.example.acadify.exceptions.UserNotFoundExc;
 import org.example.acadify.model.Group;

@@ -1,11 +1,6 @@
 package org.example.acadify.DTOs;
 
-import jakarta.persistence.*;
 import lombok.Data;
-import org.example.acadify.model.Group;
-import org.example.acadify.model.Student;
-import org.example.acadify.model.Task;
-import org.example.acadify.model.Teacher;
 
 import java.util.List;
 

@@ -7,9 +7,6 @@ import org.example.acadify.repository.StudentRepository;
 import org.example.acadify.util.MappingUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Component
 public class GroupMapper {
     private final StudentRepository studentRepository;
@@ -23,7 +20,7 @@ public class GroupMapper {
 
         groupDTO.setId(group.getId());
         groupDTO.setName(group.getName());
-        groupDTO.setStudentIds(MappingUtils.mapEntitiesToIds(group.getStudents(),Student::getId));
+        groupDTO.setStudentIds(MappingUtils.mapEntitiesToIds(group.getStudents(), Student::getId));
 
         return groupDTO;
     }

@@ -2,6 +2,8 @@ package org.example.acadify.service;
 
 import org.example.acadify.DTOs.GroupDTO;
 import org.example.acadify.exceptions.GroupNotFoundExc;
+import org.example.acadify.exceptions.IllegalArgumentExc;
+import org.example.acadify.exceptions.UserNotFoundExc;
 import org.example.acadify.mapper.GroupMapper;
 import org.example.acadify.model.Group;
 import org.example.acadify.model.Student;
@@ -29,11 +31,19 @@ public class GroupService {
         return groupMapper.toDTO(group);
     }
 
-//    public GroupDTO addStudentToGroup(String email, String groupName) {
-//        Group group = groupRepository.findGroupByName(groupName)
-//                .orElseThrow(GroupNotFoundExc::new);
-//        Student student = studentRepository.findBy
-//    }
+    public GroupDTO changeStudentGroup(String email, String newGroupName) {
+        Group group = groupRepository.findGroupByName(newGroupName)
+                .orElseThrow(GroupNotFoundExc::new);
+        Student student = studentRepository.findByEmail(email)
+                .orElseThrow(UserNotFoundExc::new);
+
+        if (group == null || student == null) throw new IllegalArgumentExc();
+
+        group.getStudents().add(student);
+        student.setGroup(group);
+        studentRepository.save(student);
+        return groupMapper.toDTO(groupRepository.save(group));
+    }
 
 }
 

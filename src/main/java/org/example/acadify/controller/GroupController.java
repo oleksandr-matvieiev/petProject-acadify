@@ -23,4 +23,10 @@ public class GroupController {
         GroupDTO groupDTO = groupService.createGroup(name);
         return new ResponseEntity<>(groupDTO, HttpStatus.CREATED);
     }
+
+    @PostMapping("/student/add-to-group")
+    public ResponseEntity<GroupDTO> addStudentToGroup(@RequestParam String email, @RequestParam String newGroupName) {
+        GroupDTO groupDTO = groupService.changeStudentGroup(email, newGroupName);
+        return new ResponseEntity<>(groupDTO, HttpStatus.OK);
+    }
 }

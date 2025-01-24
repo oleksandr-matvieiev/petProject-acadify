@@ -23,5 +23,6 @@ public class GroupService {
         groupRepository.save(group);
         return groupMapper.toDTO(group);
     }
+//    public GroupDTO addStudentToGroup(String )
 }
 

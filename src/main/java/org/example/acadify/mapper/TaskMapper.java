@@ -7,9 +7,7 @@ import org.example.acadify.model.Task;
 import org.example.acadify.model.Teacher;
 import org.example.acadify.repository.GroupRepository;
 import org.example.acadify.repository.TeacherRepository;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import org.example.acadify.util.MappingUtils;
 
 public class TaskMapper {
     private final TeacherRepository teacherRepository;
@@ -30,7 +28,7 @@ public class TaskMapper {
         taskDTO.setDeadline(task.getDeadline());
         taskDTO.setChecked(task.getChecked());
         taskDTO.setTeacherId(task.getTeacher().getId());
-        taskDTO.setGroupIds(mapGroupsToIds(task.getGroups()));
+        taskDTO.setGroupIds(MappingUtils.mapEntitiesToIds(task.getGroups(), Group::getId));
 
         return taskDTO;
     }
@@ -47,21 +45,9 @@ public class TaskMapper {
         task.setDeadline(taskDTO.getDeadline());
         task.setChecked(taskDTO.getChecked());
         task.setTeacher(teacher);
-        task.setGroups(mapIdsToGroups(taskDTO.getGroupIds()));
+        task.setGroups(MappingUtils.mapIdsToEntities(taskDTO.getGroupIds(), groupRepository::findAllById));
 
         return task;
     }
 
-    private List<Long> mapGroupsToIds(List<Group> groups) {
-        if (groups == null || groups.isEmpty()) return List.of();
-
-        return groups.stream().map(Group::getId)
-                .collect(Collectors.toList());
-    }
-
-    private List<Group> mapIdsToGroups(List<Long> ids) {
-        if (ids == null || ids.isEmpty()) return List.of();
-
-        return groupRepository.findAllById(ids);
-    }
 }

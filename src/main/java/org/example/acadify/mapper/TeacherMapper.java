@@ -6,10 +6,8 @@ import org.example.acadify.model.Task;
 import org.example.acadify.model.Teacher;
 import org.example.acadify.repository.RoleRepository;
 import org.example.acadify.repository.TaskRepository;
+import org.example.acadify.util.MappingUtils;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class TeacherMapper {
@@ -28,8 +26,8 @@ public class TeacherMapper {
         teacherDTO.setFirstName(teacher.getFirstName());
         teacherDTO.setLastName(teacher.getLastName());
         teacherDTO.setEmail(teacher.getEmail());
-        teacherDTO.setRoleIds(mapRolesToIds(teacher.getRoles()));
-        teacherDTO.setTaskIds(mapTasksToIds(teacher.getTasks()));
+        teacherDTO.setRoleIds(MappingUtils.mapEntitiesToIds(teacher.getRoles(), Role::getId));
+        teacherDTO.setTaskIds(MappingUtils.mapEntitiesToIds(teacher.getTasks(), Task::getId));
 
         return teacherDTO;
     }
@@ -41,36 +39,10 @@ public class TeacherMapper {
         teacher.setFirstName(teacherDTO.getFirstName());
         teacher.setLastName(teacherDTO.getLastName());
         teacher.setEmail(teacherDTO.getEmail());
-        teacher.setRoles(mapIdsToRoles(teacherDTO.getRoleIds()));
-        teacher.setTasks(mapIdsToTasks(teacherDTO.getTaskIds()));
+        teacher.setRoles(MappingUtils.mapIdsToEntities(teacherDTO.getRoleIds(), roleRepository::findAllById));
+        teacher.setTasks(MappingUtils.mapIdsToEntities(teacherDTO.getTaskIds(), taskRepository::findAllById));
 
         return teacher;
     }
 
-    private List<Long> mapRolesToIds(List<Role> roles) {
-        if (roles == null || roles.isEmpty()) {
-            return List.of();
-        }
-        return roles.stream().map(Role::getId)
-                .collect(Collectors.toList());
-    }
-
-    private List<Role> mapIdsToRoles(List<Long> ids) {
-        if (ids == null || ids.isEmpty()) {
-            return List.of();
-        }
-        return roleRepository.findAllById(ids);
-    }
-
-    private List<Long> mapTasksToIds(List<Task> tasks) {
-        if (tasks == null || tasks.isEmpty()) return null;
-
-        return tasks.stream().map(Task::getId).collect(Collectors.toList());
-    }
-
-    private List<Task> mapIdsToTasks(List<Long> ids) {
-        if (ids == null || ids.isEmpty()) return null;
-
-        return taskRepository.findAllById(ids);
-    }
 }

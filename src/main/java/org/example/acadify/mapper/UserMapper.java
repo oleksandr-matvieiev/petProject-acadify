@@ -4,10 +4,8 @@ import org.example.acadify.DTOs.UserDTO;
 import org.example.acadify.model.Role;
 import org.example.acadify.model.User;
 import org.example.acadify.repository.RoleRepository;
+import org.example.acadify.util.MappingUtils;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
@@ -24,7 +22,7 @@ public class UserMapper {
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
         userDTO.setEmail(user.getEmail());
-        userDTO.setRoleIds(mapRolesToIds(user.getRoles()));
+        userDTO.setRoleIds(MappingUtils.mapEntitiesToIds(user.getRoles(), Role::getId));
 
         return userDTO;
     }
@@ -36,25 +34,8 @@ public class UserMapper {
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
-        user.setRoles(mapIdsToRoles(userDTO.getRoleIds()));
+        user.setRoles(MappingUtils.mapIdsToEntities(userDTO.getRoleIds(), roleRepository::findAllById));
 
         return user;
     }
-
-    private List<Long> mapRolesToIds(List<Role> roles) {
-        if (roles == null || roles.isEmpty()) {
-            return List.of();
-        }
-        return roles.stream().map(Role::getId)
-                .collect(Collectors.toList());
-    }
-
-    private List<Role> mapIdsToRoles(List<Long> ids) {
-        if (ids == null || ids.isEmpty()) {
-            return List.of();
-        }
-        return roleRepository.findAllById(ids);
-    }
-
-
 }

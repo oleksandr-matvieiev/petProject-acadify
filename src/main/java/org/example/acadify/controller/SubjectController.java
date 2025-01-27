@@ -4,10 +4,9 @@ import org.example.acadify.DTOs.SubjectDTO;
 import org.example.acadify.service.SubjectService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/subject")
@@ -37,4 +36,17 @@ public class SubjectController {
         SubjectDTO subjectDTO = subjectService.addStudentToSubject(email, subjectName);
         return new ResponseEntity<>(subjectDTO, HttpStatus.OK);
     }
+
+    @GetMapping("/available")
+    public ResponseEntity<List<SubjectDTO>> getAvailableSubjects() {
+        List<SubjectDTO> subjectDTOs = subjectService.getAvailableSubjectsForCurrentUser();
+        return ResponseEntity.ok(subjectDTOs);
+    }
+
+    @GetMapping("/allSubjects")
+    public ResponseEntity<List<SubjectDTO>> getAllSubjects() {
+        List<SubjectDTO> subjectDTOS = subjectService.getAllSubjects();
+        return ResponseEntity.ok(subjectDTOS);
+    }
+
 }

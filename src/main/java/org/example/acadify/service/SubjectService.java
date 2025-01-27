@@ -45,8 +45,8 @@ public class SubjectService {
 
     //TODO Combine addTeacherToSubject & addStudentToSubject
     public SubjectDTO addTeacherToSubject(String email, String subjectName) {
-        if (!teacherRepository.existsByEmail(email) || subjectRepository.existsByName(subjectName))
-            throw new IllegalArgumentExc();
+        if (!teacherRepository.existsByEmail(email) || !subjectRepository.existsByName(subjectName))
+            throw new IllegalArgumentExc(subjectName);
 
         Teacher teacher = teacherRepository.findByEmail(email)
                 .orElseThrow(UserNotFoundExc::new);

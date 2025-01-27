@@ -82,6 +82,13 @@ public class AuthService {
         return jwtTokenProvider.generateToken(user.getEmail(), roles);
     }
 
+    public User getCurrentUserDetails() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+    }
+
     public StudentDTO registerStudent(UserRegistrationDTO registerDTO) {
         if (!checkIfAllParamsIsNotBlack(registerDTO))
             throw new IllegalArgumentExc("You have bad params fpr registration!");

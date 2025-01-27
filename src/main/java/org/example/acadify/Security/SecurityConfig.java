@@ -40,9 +40,10 @@ public class SecurityConfig {
                 cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("api/auth/register/teacher").hasRole("ADMIN")
-                        .requestMatchers("api/auth/register/student").hasRole("ADMIN")
-                        .requestMatchers("api/group/student/add-to-group").hasRole("ADMIN")
+                        .requestMatchers("api/auth/register/**").hasRole("ADMIN")
+                        .requestMatchers("api/auth/login").permitAll()
+                        .requestMatchers("api/group/**").hasRole("ADMIN")
+                        .requestMatchers("api/subject/available").hasAnyRole("TEACHER","STUDENT")
                         .requestMatchers("api/subject/**").hasRole("ADMIN")
                         .requestMatchers("api/task/create").hasRole("TEACHER")
                         .anyRequest().permitAll()

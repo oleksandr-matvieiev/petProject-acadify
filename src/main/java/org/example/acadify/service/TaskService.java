@@ -48,7 +48,7 @@ public class TaskService {
         if (groups.size() != taskCreateDTO.getGroupNames().size())
             throw new IllegalArgumentExc("Some groups not found");
 
-        task.setTitle(task.getTitle());
+        task.setTitle(taskCreateDTO.getTitle());
         task.setContent(taskCreateDTO.getContent());
         task.setType(taskCreateDTO.getType());
         task.setDeadline(taskCreateDTO.getDeadline());

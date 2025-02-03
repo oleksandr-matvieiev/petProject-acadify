@@ -25,12 +25,13 @@ public class TaskMapper {
 
         taskDTO.setId(task.getId());
         taskDTO.setTitle(task.getTitle());
-        taskDTO.setContent(taskDTO.getContent());
+        taskDTO.setContent(task.getContent());
         taskDTO.setType(task.getType());
         taskDTO.setDeadline(task.getDeadline());
         taskDTO.setChecked(task.getChecked());
         taskDTO.setTeacherId(task.getTeacher().getId());
         taskDTO.setGroupIds(MappingUtils.mapEntitiesToIds(task.getGroups(), Group::getId));
+        taskDTO.setSubjectId(task.getSubject().getId());
 
         return taskDTO;
     }

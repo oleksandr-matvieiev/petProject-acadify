@@ -8,7 +8,9 @@ import org.example.acadify.model.Task;
 import org.example.acadify.model.TaskSubmission;
 import org.example.acadify.repository.StudentRepository;
 import org.example.acadify.repository.TaskRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TaskSubmissionMapper {
     private final StudentRepository studentRepository;
     private final TaskRepository taskRepository;
@@ -18,7 +20,7 @@ public class TaskSubmissionMapper {
         this.taskRepository = taskRepository;
     }
 
-    TaskSubmissionDTO toDTO(TaskSubmission submission) {
+    public TaskSubmissionDTO toDTO(TaskSubmission submission) {
         TaskSubmissionDTO taskSubmissionDTO = new TaskSubmissionDTO();
 
         taskSubmissionDTO.setId(submission.getId());
@@ -30,7 +32,7 @@ public class TaskSubmissionMapper {
         return taskSubmissionDTO;
     }
 
-    TaskSubmission toEntity(TaskSubmissionDTO submissionDTO) {
+    public TaskSubmission toEntity(TaskSubmissionDTO submissionDTO) {
         TaskSubmission taskSubmission = new TaskSubmission();
         Student student = studentRepository.findById(submissionDTO.getStudentId())
                 .orElseThrow(UserNotFoundExc::new);

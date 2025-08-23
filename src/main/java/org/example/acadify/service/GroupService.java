@@ -11,6 +11,9 @@ import org.example.acadify.repository.GroupRepository;
 import org.example.acadify.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class GroupService {
@@ -43,6 +46,11 @@ public class GroupService {
         student.setGroup(group);
         studentRepository.save(student);
         return groupMapper.toDTO(groupRepository.save(group));
+    }
+
+    public List<GroupDTO> getAllGroups() {
+        List<Group> groups = groupRepository.findAll();
+        return groups.stream().map(groupMapper::toDTO).collect(Collectors.toList()) ;
     }
 
 }

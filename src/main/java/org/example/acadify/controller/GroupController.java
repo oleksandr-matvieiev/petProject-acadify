@@ -4,10 +4,9 @@ import org.example.acadify.DTOs.GroupDTO;
 import org.example.acadify.service.GroupService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/group")
@@ -28,5 +27,10 @@ public class GroupController {
     public ResponseEntity<GroupDTO> addStudentToGroup(@RequestParam String email, @RequestParam String newGroupName) {
         GroupDTO groupDTO = groupService.changeStudentGroup(email, newGroupName);
         return new ResponseEntity<>(groupDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<List<GroupDTO>> getAllGroups() {
+        return new ResponseEntity<>(groupService.getAllGroups(), HttpStatus.OK);
     }
 }

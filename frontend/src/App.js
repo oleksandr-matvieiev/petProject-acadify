@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import './App.css';
-import AuthPage from "./component/AuthPage";
+import {AuthPage} from "./component/AuthPage";
 import AdminPage from "./component/AdminPage";
 import {RegisterTeacherPage} from "./component/RegisterTeacherPage";
 import {RegisterStudentPage} from "./component/RegisterStudentPage";

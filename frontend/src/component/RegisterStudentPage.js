@@ -36,7 +36,9 @@ const buttonStyle = (bgColor, textColor = "#fff") => ({
     width: "100%",
 });
 
-const RegisterTeacherPage = () => {
+
+const RegisterStudentPage = () => {
+
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -57,14 +59,16 @@ const RegisterTeacherPage = () => {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://localhost:8080/api/auth/register/teacher",
+                "http://localhost:8080/api/auth/register/student",
                 formData,
                 {
-                    headers: {Authorization: `Bearer ${token}`},
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 }
             );
             if (response.status === 201) {
-                alert("Teacher registered successfully!");
+                alert("Student registered successfully!");
                 setFormData({
                     firstName: "",
                     lastName: "",
@@ -76,15 +80,15 @@ const RegisterTeacherPage = () => {
                 alert("Something went wrong!");
             }
         } catch (error) {
-            console.error("Error registering teacher:", error);
-            alert("Error registering teacher. Please try again.");
+            console.error("Error registering student:", error);
+            alert("Error registering student. Please try again.");
         }
     };
 
     return (
         <div style={formContainerStyle}>
             <h1 style={{textAlign: "center", marginBottom: "20px", color: "#333"}}>
-                Register New Teacher
+                Register New Student
             </h1>
             <form onSubmit={handleSubmit}>
                 <input
@@ -131,12 +135,12 @@ const RegisterTeacherPage = () => {
                     onChange={handleChange}
                     style={inputStyle}
                 />
-                <button type="submit" style={buttonStyle("#007bff")}>
-                    Register Teacher
+                <button type="submit" style={buttonStyle("#28a745")}>
+                    Register Student
                 </button>
             </form>
         </div>
     );
 };
 
-export {RegisterTeacherPage};
+export {RegisterStudentPage};

@@ -3,7 +3,8 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import './App.css';
 import AuthPage from "./component/AuthPage";
 import AdminPage from "./component/AdminPage";
-import {RegisterStudentPage, RegisterTeacherPage} from "./component/RegisterTeacherPage";
+import {RegisterTeacherPage} from "./component/RegisterTeacherPage";
+import {RegisterStudentPage} from "./component/RegisterStudentPage";
 import MainPage from "./component/MainPage";
 import AdminSubjectsPage from "./component/AdminSubjectPage";
 
